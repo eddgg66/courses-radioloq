@@ -4,295 +4,351 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Radioloq Courses — Coming Soon</title>
+<meta name="description" content="Structured radiology education for physicians and medical students. In 5 languages. Launching soon."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0C1E3C;--navy2:#081426;
-  --burgundy:#7B2D3A;--burgundy2:#9B3A4A;
-  --gold:#C9A84C;--gold2:#E8C97A;
-  --cream:#F5F0E8;
+  --teal:#0FBFA8;--teal-dark:#0A9A87;--teal-tint:#E6FBF7;
+  --purple:#7B61FF;--purple-dark:#5B3FE0;--purple-tint:#F1EEFF;
+  --ink:#16182B;--muted:#5B6178;--faint:#9498AC;
+  --border:rgba(22,24,43,.08);--border2:rgba(22,24,43,.13);
+  --grad:linear-gradient(100deg,#0FBFA8,#7B61FF);
 }
-html,body{height:100%}
+html,body{height:100%;overflow-x:hidden}
 body{
-  font-family:'Outfit',sans-serif;
-  background:var(--navy2);
-  color:#fff;
+  font-family:'Inter',sans-serif;
+  background:#fff;color:var(--ink);
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  min-height:100vh;
-  position:relative;overflow:hidden;
+  min-height:100vh;position:relative;
 }
 
-.bg{position:fixed;inset:0;pointer-events:none}
-.bg-grad{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(ellipse 80% 55% at 50% 0%,rgba(123,45,58,.26) 0%,transparent 58%),
-    radial-gradient(ellipse 50% 40% at 0% 100%,rgba(12,30,60,.95) 0%,transparent 55%),
-    radial-gradient(ellipse 50% 40% at 100% 100%,rgba(12,30,60,.95) 0%,transparent 55%),
-    linear-gradient(180deg,var(--navy2) 0%,#0a1a30 50%,var(--navy2) 100%);
+/* ── SCAN LINE — same as main site ── */
+.scan{
+  position:fixed;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(15,191,168,.08),rgba(123,97,255,.45),rgba(15,191,168,.08),transparent);
+  animation:scandown 8s linear infinite;pointer-events:none;z-index:0;
 }
-.bg-lines{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px);
-  background-size:100% 88px;
-}
-.bg-vlines{
-  position:absolute;inset:0;
-  background-image:linear-gradient(90deg,transparent 49.9%,rgba(255,255,255,.016) 50%,transparent 50.1%);
-  background-size:380px 100%;
-}
-.orb{
-  position:absolute;top:-25%;left:50%;transform:translateX(-50%);
-  width:800px;height:600px;
-  background:radial-gradient(ellipse,rgba(123,45,58,.2) 0%,transparent 65%);
-  border-radius:50%;
+@keyframes scandown{0%{top:0%}100%{top:100%}}
+
+/* ── PULSE — same as main site ── */
+.pulse{
+  position:fixed;top:-180px;left:50%;transform:translateX(-50%);
+  width:800px;height:700px;
+  background:radial-gradient(ellipse,rgba(15,191,168,.13) 0%,rgba(123,97,255,.09) 45%,transparent 70%);
+  border-radius:50%;pointer-events:none;z-index:0;
   animation:breathe 9s ease-in-out infinite;
 }
-@keyframes breathe{0%,100%{transform:translateX(-50%) scale(1);opacity:.65}50%{transform:translateX(-50%) scale(1.1);opacity:1}}
-.scan{
-  position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(201,168,76,.1),rgba(201,168,76,.22),rgba(201,168,76,.1),transparent);
-  animation:scandown 14s linear infinite;
+@keyframes breathe{
+  0%,100%{transform:translateX(-50%) scale(1);opacity:.7}
+  50%{transform:translateX(-50%) scale(1.08);opacity:1}
 }
-@keyframes scandown{0%{top:0}100%{top:100%}}
 
-/* corners */
-.c{position:absolute;width:44px;height:44px}
-.c::before,.c::after{content:'';position:absolute;background:rgba(201,168,76,.3)}
-.c::before{width:1px;height:100%}.c::after{width:100%;height:1px}
-.tl{top:28px;left:28px}.tl::before{top:0;left:0}.tl::after{top:0;left:0}
-.tr{top:28px;right:28px}.tr::before{top:0;right:0}.tr::after{top:0;right:0}
-.bl{bottom:28px;left:28px}.bl::before{bottom:0;left:0}.bl::after{bottom:0;left:0}
-.br{bottom:28px;right:28px}.br::before{bottom:0;right:0}.br::after{bottom:0;right:0}
-
-/* content */
-.wrap{
+/* ── NAV ── */
+nav{
   position:relative;z-index:10;
-  text-align:center;padding:0 28px;
-  max-width:680px;width:100%;
-  animation:up 1.5s cubic-bezier(.22,.61,.36,1) forwards;opacity:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 48px;
+  border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.85);backdrop-filter:blur(12px);
 }
-@keyframes up{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:translateY(0)}}
+.logo{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;
+  color:var(--ink);letter-spacing:-.2px;
+}
+.logo::before{
+  content:'';width:8px;height:8px;border-radius:50%;
+  background:var(--grad);flex-shrink:0;
+}
+.logo-sub{
+  font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal-dark);margin-left:4px;
+}
+.nav-back{
+  font-size:12px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color .2s;
+}
+.nav-back:hover{color:var(--teal-dark)}
 
-.back{
-  display:inline-flex;align-items:center;gap:6px;
-  color:rgba(255,255,255,.35);font-size:11px;
-  text-decoration:none;letter-spacing:2px;text-transform:uppercase;
-  margin-bottom:48px;padding-bottom:5px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  transition:color .2s;
+/* ── MAIN ── */
+main{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 32px;
+  position:relative;z-index:1;
 }
-.back:hover{color:rgba(255,255,255,.7)}
 
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:10px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold2);margin-bottom:30px;
+  font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal-dark);background:var(--teal-tint);
+  padding:8px 18px;border-radius:99px;
+  border:1px solid rgba(15,191,168,.18);margin-bottom:32px;
 }
-.edot{
-  width:5px;height:5px;border-radius:50%;background:var(--gold2);
-  animation:glow 2.5s ease-in-out infinite;
-  box-shadow:0 0 8px var(--gold);
+.dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--grad);
+  animation:pulse-dot 2.5s ease-in-out infinite;
 }
-@keyframes glow{0%,100%{opacity:1;box-shadow:0 0 7px var(--gold)}50%{opacity:.35;box-shadow:none}}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
 
 h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(38px,6.5vw,76px);
-  line-height:1.07;letter-spacing:-1.5px;font-weight:500;
-  color:#fff;margin-bottom:22px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(36px,5.5vw,68px);font-weight:800;
+  line-height:1.08;letter-spacing:-1.5px;
+  color:var(--ink);margin-bottom:14px;
 }
-h1 em{font-style:italic;color:var(--gold2);display:block}
-
-.sub{
-  font-size:clamp(14px,1.8vw,17px);
-  color:rgba(255,255,255,.48);
-  line-height:1.88;font-weight:300;
-  max-width:490px;margin:0 auto 44px;
+h1 em{
+  font-style:normal;
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-
-.div{
-  width:52px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(201,168,76,.45),transparent);
-  margin:0 auto 44px;
+.subtitle{
+  font-size:16px;color:var(--muted);font-weight:400;
+  max-width:520px;margin:0 auto 48px;line-height:1.75;
 }
 
-.pills{
-  display:flex;gap:8px;justify-content:center;
-  flex-wrap:wrap;margin-bottom:48px;
+/* ── COUNTDOWN ── */
+.countdown{
+  display:flex;gap:2px;margin-bottom:52px;
+  border:1px solid var(--border2);overflow:hidden;border-radius:16px;
 }
-.pill{
-  font-size:10px;letter-spacing:1.3px;text-transform:uppercase;
-  padding:6px 14px;border:1px solid rgba(255,255,255,.1);
-  border-radius:2px;color:rgba(255,255,255,.4);
-  background:rgba(255,255,255,.03);
+.cd-unit{
+  padding:24px 28px;text-align:center;background:#fff;
+  border-right:1px solid var(--border);
+  min-width:88px;
+}
+.cd-unit:last-child{border-right:none}
+.cd-num{
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:38px;font-weight:800;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  color:transparent;line-height:1;margin-bottom:6px;letter-spacing:-1px;
+}
+.cd-lbl{font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--faint)}
+
+/* ── FEATURES ── */
+.features{
+  display:flex;gap:0;margin-bottom:52px;
+  border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  max-width:700px;width:100%;
+}
+.feature{
+  flex:1;padding:24px 20px;text-align:center;
+  border-right:1px solid var(--border);
+  transition:background .3s;
+}
+.feature:last-child{border-right:none}
+.feature:hover{background:var(--teal-tint)}
+.feat-icon{font-size:22px;margin-bottom:10px}
+.feat-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.feat-desc{font-size:11px;color:var(--muted);line-height:1.6}
+
+/* ── NOTIFY FORM ── */
+.notify-form{
+  display:flex;gap:10px;max-width:440px;width:100%;margin-bottom:20px;flex-wrap:wrap;justify-content:center;
+}
+.notify-input{
+  flex:1;min-width:200px;padding:14px 18px;font-size:14px;
+  border:1.5px solid var(--border2);border-radius:99px;
+  font-family:'Inter',sans-serif;color:var(--ink);outline:none;
+  transition:border-color .2s;background:#fff;
+}
+.notify-input:focus{border-color:var(--teal)}
+.notify-btn{
+  padding:14px 28px;border:none;border-radius:99px;
+  background:var(--grad);color:#fff;font-size:13px;font-weight:600;
+  font-family:'Inter',sans-serif;cursor:pointer;
+  box-shadow:0 8px 20px rgba(123,97,255,.25);
+  transition:transform .2s,box-shadow .2s;white-space:nowrap;
+}
+.notify-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(123,97,255,.32)}
+.notify-note{font-size:11px;color:var(--faint);letter-spacing:.5px}
+.success-msg{
+  display:none;font-size:14px;color:var(--teal-dark);font-weight:500;
+  padding:14px 24px;background:var(--teal-tint);border-radius:99px;
+  border:1px solid rgba(15,191,168,.2);
 }
 
-.success{
-  display:none;font-size:14px;color:var(--gold2);
-  margin-bottom:20px;letter-spacing:.3px;font-weight:300;
+/* ── LANGUAGES ── */
+.langs{
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:0;
+}
+.lang-pill{
+  font-size:11px;font-weight:500;letter-spacing:1px;
+  padding:6px 14px;border-radius:99px;
+  border:1px solid var(--border2);color:var(--muted);
 }
 
-.form{
-  display:flex;gap:0;max-width:440px;margin:0 auto 14px;
-  border:1px solid rgba(255,255,255,.11);border-radius:3px;
-  overflow:hidden;background:rgba(255,255,255,.035);
-  backdrop-filter:blur(8px);transition:border-color .25s;
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  padding:24px 48px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(12px);
 }
-.form:focus-within{border-color:rgba(201,168,76,.45)}
-.form input{
-  flex:1;padding:14px 18px;background:transparent;
-  border:none;outline:none;color:#fff;font-size:14px;
-  font-family:'Outfit',sans-serif;
+.footer-logo{
+  font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;
+  color:var(--ink);display:flex;align-items:center;gap:8px;
 }
-.form input::placeholder{color:rgba(255,255,255,.28)}
-.form button{
-  padding:14px 22px;background:var(--burgundy);color:#fff;
-  border:none;cursor:pointer;font-size:13px;font-weight:500;
-  font-family:'Outfit',sans-serif;letter-spacing:.3px;
-  transition:background .2s;white-space:nowrap;
-}
-.form button:hover{background:var(--burgundy2)}
+.footer-logo::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0}
+.footer-copy{font-size:11px;color:var(--faint)}
+.footer-link{font-size:11px;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-link:hover{color:var(--teal-dark)}
 
-.fnote{font-size:11px;color:rgba(255,255,255,.22);letter-spacing:.3px;margin-bottom:52px}
-.err{display:none;font-size:12px;color:#E8907A;margin-bottom:12px;letter-spacing:.3px}
-.btn-loading{opacity:.6;pointer-events:none}
-
-.bnav{display:flex;align-items:center;gap:22px;justify-content:center;flex-wrap:wrap}
-.bl2{font-size:12px;color:rgba(255,255,255,.28);text-decoration:none;letter-spacing:.4px;transition:color .2s}
-.bl2:hover{color:rgba(255,255,255,.7)}
-.bs{color:rgba(255,255,255,.1);font-size:10px}
-
-.brand{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
-  font-family:'Playfair Display',serif;
-  font-size:13px;color:rgba(255,255,255,.15);
-  white-space:nowrap;letter-spacing:.5px;z-index:10;
-}
-
-
-@media(max-width:480px){
-  .c{display:none}
-  h1{letter-spacing:-.8px}
-  .form{flex-direction:column}
-  .form button{border-top:1px solid rgba(255,255,255,.07)}
+@media(max-width:640px){
+  nav{padding:18px 20px}
+  .logo-sub{display:none}
+  .countdown{gap:0}
+  .cd-unit{padding:18px 16px;min-width:68px}
+  .cd-num{font-size:28px}
+  .features{flex-direction:column}
+  .feature{border-right:none;border-bottom:1px solid var(--border)}
+  .feature:last-child{border-bottom:none}
+  footer{padding:20px;flex-direction:column;text-align:center}
 }
 </style>
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X2J9KT57VT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-X2J9KT57VT');
-</script>
 </head>
 <body>
 
-<div class="bg">
-  <div class="bg-grad"></div>
-  <div class="bg-lines"></div>
-  <div class="bg-vlines"></div>
-  <div class="orb"></div>
-  <div class="scan"></div>
-</div>
+<div class="pulse"></div>
+<div class="scan"></div>
 
-<div class="c tl"></div>
-<div class="c tr"></div>
-<div class="c bl"></div>
-<div class="c br"></div>
+<!-- NAV -->
+<nav>
+  <a href="https://radioloq.com" class="logo">
+    Radioloq
+    <span class="logo-sub">Courses</span>
+  </a>
+  <a href="https://radioloq.com" class="nav-back">← Main Site</a>
+</nav>
 
-<div class="wrap">
-
-  <a href="https://radioloq.com" class="back">← radioloq.com</a>
-
-  <div class="eyebrow"><span class="edot"></span>courses.radioloq.com — Coming soon</div>
-
-  <h1>Radiology education<em>at German standards</em></h1>
-
-  <p class="sub">Structured courses for physicians who want to read scans with confidence — from your first MRI to Facharzt preparation. In 5 languages.</p>
-
-  <div class="div"></div>
-
-  <div class="success" id="suc">✓ &nbsp;You're on the list. One email when we launch.</div>
-  <div class="err" id="err"></div>
-
-  <div class="form" id="frm">
-    <input type="email" id="em" placeholder="Your email address" autocomplete="email"/>
-    <button id="btn" onclick="sub()">Notify me at launch</button>
+<!-- MAIN -->
+<main>
+  <div class="eyebrow">
+    <span class="dot"></span>
+    In Development
   </div>
 
-  <div class="fnote">No spam. One email at launch.</div>
+  <h1>Radiology education<br><em>in your language.</em></h1>
 
-  <div class="bnav">
-    <a href="https://radioloq.com" class="bl2">Patient second opinion ↗</a>
-    <span class="bs">·</span>
-    <a href="https://radioloq.com#about" class="bl2">About me</a>
-    <span class="bs">·</span>
-    <a href="mailto:info@radioloq.com" class="bl2">info@radioloq.com</a>
+  <p class="subtitle">
+    Structured radiology courses for physicians, residents and medical students — from systematic MRI and CT reading to case-based clinical reasoning and Facharzt preparation.
+  </p>
+
+  <!-- Countdown -->
+  <div class="countdown" id="countdown">
+    <div class="cd-unit"><div class="cd-num" id="cd-d">--</div><div class="cd-lbl">Days</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-h">--</div><div class="cd-lbl">Hours</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-m">--</div><div class="cd-lbl">Minutes</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-s">--</div><div class="cd-lbl">Seconds</div></div>
   </div>
 
-</div>
+  <!-- Features -->
+  <div class="features">
+    <div class="feature">
+      <div class="feat-icon">🧠</div>
+      <div class="feat-title">Case-based learning</div>
+      <div class="feat-desc">Real radiological cases, systematic reading approach</div>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🔬</div>
+      <div class="feat-title">MRI · CT · X-Ray</div>
+      <div class="feat-desc">All major modalities, structured from first principles</div>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🎯</div>
+      <div class="feat-title">Facharzt preparation</div>
+      <div class="feat-desc">Targeted content for specialist training</div>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">📱</div>
+      <div class="feat-title">On demand</div>
+      <div class="feat-desc">Learn at your own pace, anywhere</div>
+    </div>
+  </div>
 
-<div class="brand">Radioloq &nbsp;·&nbsp; Germany</div>
-<div style="position:fixed;bottom:10px;left:50%;transform:translateX(-50%);font-size:10px;color:rgba(255,255,255,.18);white-space:nowrap;z-index:10">
-  By using this site you agree to our <a href="https://radioloq.com/terms.html" style="color:rgba(255,255,255,.25);text-decoration:underline">Terms</a> &amp; <a href="https://radioloq.com/privacy.html" style="color:rgba(255,255,255,.25);text-decoration:underline">Privacy Policy</a>.
-</div>
+  <!-- Notify form -->
+  <div class="notify-form" id="notify-form">
+    <input class="notify-input" type="email" id="notify-email" placeholder="Your email address"/>
+    <button class="notify-btn" onclick="notifyMe()">Notify me at launch</button>
+  </div>
+  <div class="success-msg" id="success-msg">✓ You're on the list — we'll be in touch.</div>
+  <p class="notify-note">No spam. One email when we launch.</p>
+
+  <div style="height:32px"></div>
+  <div class="langs">
+    <span class="lang-pill">Türkçe</span>
+    <span class="lang-pill">Azərbaycanca</span>
+    <span class="lang-pill">Русский</span>
+    <span class="lang-pill">Deutsch</span>
+    <span class="lang-pill">English</span>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Radioloq Courses</div>
+  <span class="footer-copy">© 2026 Radioloq · courses.radioloq.com</span>
+  <a href="https://radioloq.com" class="footer-link">radioloq.com →</a>
+</footer>
 
 <script>
-// ── FORMSPREE ID ──────────────────────────────
-// 1. formspree.io → sign up → New Form → copy your ID
-// 2. Paste it below replacing YOUR_FORM_ID
-const FORMSPREE_ID = 'mrejegow';
-// ─────────────────────────────────────────────
+// Countdown to launch target
+(function(){
+  var target = new Date('2026-09-01T00:00:00');
+  function update(){
+    var now = new Date();
+    var diff = target - now;
+    if(diff <= 0){
+      document.getElementById('countdown').style.display='none';
+      return;
+    }
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor((diff%86400000)/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+})();
 
-async function sub(){
-  const emailEl = document.getElementById('em');
-  const btnEl   = document.getElementById('btn');
-  const sucEl   = document.getElementById('suc');
-  const errEl   = document.getElementById('err');
-  const frmEl   = document.getElementById('frm');
-  const v = emailEl.value.trim();
-
-  // Basic validation
-  if(!v || !v.includes('@') || !v.includes('.')){
-    emailEl.style.borderBottom = '1px solid rgba(232,144,122,.6)';
-    emailEl.placeholder = 'Please enter a valid email';
-    emailEl.value = '';
+// Notify form
+async function notifyMe(){
+  var email = document.getElementById('notify-email').value.trim();
+  if(!email || !email.includes('@')){
+    document.getElementById('notify-email').focus();
     return;
   }
-
-  // Loading state
-  btnEl.textContent = 'Sending…';
-  btnEl.classList.add('btn-loading');
-  errEl.style.display = 'none';
-
-  try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ email: v, source: 'courses.radioloq.com' })
+  try{
+    var res = await fetch('https://formspree.io/f/xrejnvok',{
+      method:'POST',
+      headers:{'Content-Type':'application/json',Accept:'application/json'},
+      body:JSON.stringify({
+        email,
+        _subject:'Radioloq Courses — Launch notification signup',
+        source:'courses.radioloq.com'
+      })
     });
-
     if(res.ok){
-      frmEl.style.display = 'none';
-      sucEl.style.display = 'block';
-    } else {
-      throw new Error('Server error');
+      document.getElementById('notify-form').style.display='none';
+      document.getElementById('success-msg').style.display='block';
     }
-  } catch(e) {
-    btnEl.textContent = 'Notify me at launch';
-    btnEl.classList.remove('btn-loading');
-    errEl.textContent = 'Something went wrong. Try again or email info@radioloq.com';
-    errEl.style.display = 'block';
+  }catch(e){
+    alert('Something went wrong. Email us directly: info@radioloq.com');
   }
 }
 
-document.getElementById('em').addEventListener('keydown', e => { if(e.key === 'Enter') sub(); });
+// Enter key on input
+document.getElementById('notify-email').addEventListener('keydown',function(e){
+  if(e.key==='Enter') notifyMe();
+});
 </script>
 </body>
 </html>
